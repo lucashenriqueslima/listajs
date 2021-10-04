@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista JS</title>
+</head>
+<body>
+
+    <div id="dvTabela" class="max-width">
+        <input type="text" id="txtBusca" class="max-width" />
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefon</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        var dados = [
+            [1, "Lucas", "lucashenrique@hotmail.com", "85 99439-0988", "Ativo"],
+            [2, "Pedro", "pedropetro@hot.com", "62 123456789", "Passivo"],
+            [3, "Bolsonaro", "presidente@hotmail.com", "11 909902123", "Medio"],
+            
+        ]
+
+        var tbody = document.getElementById("tbody")
+        for(var i = 0; i < dados.length; i++){
+            var tr = "<tr>" +
+            "<td><input type='checkbox' value='"+dados[i][0]+"'></td>" +
+            "<td>" + dados[i][1] + "</td>" +
+            "<td>" + dados[i][2] + "</td>" +
+            "<td>" + dados[i][3] + "</td>" + 
+            "<td>" + dados[i][4] + "</td>" +  
+            "</tr>"
+            tbody.innerHTML += tr;
+        }
+        
+        var tr = tbody.childNodes
+
+        document.getElementById("txtBusca").addEventListener("keydown", function(){
+            var busca = document.getElementById("txtBusca").value.toLowerCase()
+            
+            for(var i = 0; i < tbody.childNodes.length; i++ ){
+                var achou = false
+                var tr = tbody.childNodes[i]
+                console.log(tr)
+                var td = tr.childNodes
+            
+
+                for(var j = 1; j < td.length; j++){
+                    var value = td[j].childNodes[0].nodeValue.toLocaleLowerCase()
+                    console.log(value)
+                    if(value.indexOf(busca) >= 0){
+                        achou = true
+                    }
+                }
+                
+                if(achou){
+                    tr.style.display = "table-row"
+                }else{
+                    tr.style.display = "none"
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
